@@ -5,7 +5,9 @@ plugins {
 }
 
 group = "com.github.fenrur"
-version = "1.0.0"
+version = System.getenv("VERSION") ?: "1.0.0"
+
+val signalVersion = System.getenv("VERSION") ?: "1.0.0"
 
 repositories {
     mavenCentral()
@@ -17,7 +19,7 @@ val vaadinVersion = "24.6.3"
 
 dependencies {
     // Signal library
-    api("com.github.fenrur:signal:1.0.0")
+    api("com.github.fenrur:signal:$signalVersion")
 
     // Vaadin
     compileOnly("com.vaadin:vaadin:$vaadinVersion")
