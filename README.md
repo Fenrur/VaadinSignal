@@ -128,6 +128,25 @@ Efficient list rendering with minimal DOM updates, similar to SolidJS `<For>`.
 > - The item type must properly implement `equals()` and `hashCode()` for efficient diffing. Use `data class` or implement these methods manually.
 > - The container calling `map()` must be attached to a parent and should only have `map()` as its child — do not mix with other children.
 
+#### Data class with identity
+
+The diffing algorithm uses `equals()` to detect changes. Include a unique `id` field to ensure proper identity:
+
+```kotlin
+import java.util.UUID
+
+// ✅ Good: data class with unique id for identity
+data class Todo(
+    val title: String,
+    val completed: Boolean = false,
+    val id: UUID = UUID.randomUUID()  // Unique identity for diffing
+)
+```
+
+> 💡 The `id` field uses `UUID.randomUUID()` to generate a unique identifier. This ensures each `Todo` instance has a distinct identity, even if `title` and `completed` are the same. Without an `id`, two todos with the same title would be considered equal.
+
+#### Basic example
+
 ```kotlin
 val todos = mutableSignalOf(listOf<Todo>())
 
@@ -146,7 +165,29 @@ verticalLayout {
 }
 ```
 
-With index access:
+#### Updating an item in the list
+
+Since `data class` is immutable, use `copy()` to create updated versions:
+
+```kotlin
+val todos = mutableSignalOf(listOf<Todo>())
+
+// Toggle completion status
+fun toggleTodo(todo: Todo) {
+    todos.update { list ->
+        list.map { if (it.id == todo.id) it.copy(completed = !it.completed) else it }
+    }
+}
+
+// Update title
+fun renameTodo(todo: Todo, newTitle: String) {
+    todos.update { list ->
+        list.map { if (it.id == todo.id) it.copy(title = newTitle) else it }
+    }
+}
+```
+
+#### With index access
 
 ```kotlin
 val items = mutableSignalOf(listOf("A", "B", "C"))
@@ -159,6 +200,24 @@ verticalLayout {
     }
 }
 ```
+
+#### Using simple types (String, Int, etc.)
+
+For simple types, the value itself serves as identity:
+
+```kotlin
+val tags = mutableSignalOf(listOf("kotlin", "vaadin", "reactive"))
+
+div {
+    map(tags) { tag ->
+        span(tag) {
+            className = "tag"
+        }
+    }
+}
+```
+
+> ⚠️ Be careful with duplicates! If you have `listOf("A", "A", "B")`, the two `"A"` items will be considered identical. Use a wrapper `data class` with an `id` if duplicates are possible.
 
 ### Conditional Rendering
 
@@ -282,6 +341,15 @@ verticalLayout {
 ### Complete Example: Todo App
 
 ```kotlin
+import java.util.UUID
+
+// Data class with unique id for proper diffing
+data class Todo(
+    val title: String,
+    val completed: Boolean = false,
+    val id: UUID = UUID.randomUUID()
+)
+
 class TodoView : KComposite() {
     private val todos = mutableSignalOf(listOf<Todo>())
     private val newTodoText = mutableSignalOf("")
@@ -303,7 +371,12 @@ class TodoView : KComposite() {
             div {
                 map(todos) { todo ->
                     horizontalLayout {
-                        checkbox { value = todo.completed }
+                        checkbox {
+                            value = todo.completed
+                            addValueChangeListener {
+                                toggleTodo(todo)
+                            }
+                        }
                         span(todo.title)
                         button("×") { onClick { removeTodo(todo) } }
                     }
@@ -315,8 +388,14 @@ class TodoView : KComposite() {
     private fun addTodo() {
         val text = newTodoText.value
         if (text.isNotBlank()) {
-            todos.value += Todo(text)
+            todos.value += Todo(title = text)
             newTodoText.value = ""
+        }
+    }
+
+    private fun toggleTodo(todo: Todo) {
+        todos.update { list ->
+            list.map { if (it.id == todo.id) it.copy(completed = !it.completed) else it }
         }
     }
 

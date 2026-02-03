@@ -10,10 +10,14 @@ import com.vaadin.flow.component.HasText
 // ============================================
 
 /**
- * Reactive text for any component implementing HasText.
+ * Reactive text content for any component implementing HasText.
+ *
+ * **Note:** Use `textContent()` instead of `text()` to avoid ambiguity with
+ * Karibu-DSL's `text()` which creates a Text child component.
+ * This function sets the component's own text content via `setText()`.
  */
-@JvmName("hasTextTextSignal")
-fun <C> C.text(signal: Signal<String?>)
+@JvmName("hasTextTextContentSignal")
+fun <C> C.textContent(signal: Signal<String?>)
         where C : HasText, C : AttachNotifier, C : DetachNotifier {
     fun apply(text: String?) {
         setText(text)

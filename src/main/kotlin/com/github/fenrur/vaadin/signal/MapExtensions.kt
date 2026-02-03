@@ -12,6 +12,12 @@ import com.vaadin.flow.component.html.Div
 
 /**
  * Container for efficient list rendering with minimal DOM updates.
+ *
+ * Uses a diffing algorithm that compares items by `equals()` to determine
+ * which components need to be re-rendered. Only changed items are updated.
+ *
+ * **Note:** The item type `T` must properly implement `equals()` and `hashCode()`
+ * for the diffing to work correctly. Use `data class` or implement these methods manually.
  */
 class UiMapContainer<T>(private val topContainer: HasComponents) {
     private data class BufferEntry<T>(var value: T?, val container: Div)
@@ -61,6 +67,12 @@ class UiMapContainer<T>(private val topContainer: HasComponents) {
  * Reactive list rendering with efficient updates.
  * Similar to SolidJS For component.
  *
+ * **Important requirements:**
+ * - **Item type must implement `equals()` and `hashCode()`** for efficient diffing (identity).
+ *   Use `data class` or implement these methods manually.
+ * - **Container must be attached to a parent** and should only have `map()` as its child.
+ *   Do not mix with other children.
+ *
  * @param signal Signal containing the list of items
  * @param initialCall If true, renders immediately
  * @param overrideVisibleTopContainer If true, hides container when list is empty
@@ -85,6 +97,18 @@ fun <T, MAPPED_COMP, PARENT> PARENT.map(
 
 /**
  * Indexed map for rendering lists with index access.
+ * Similar to SolidJS For component but with index parameter.
+ *
+ * **Important requirements:**
+ * - **Item type must implement `equals()` and `hashCode()`** for efficient diffing (identity).
+ *   Use `data class` or implement these methods manually.
+ * - **Container must be attached to a parent** and should only have `mapIndexed()` as its child.
+ *   Do not mix with other children.
+ *
+ * @param signal Signal containing the list of items
+ * @param initialCall If true, renders immediately
+ * @param overrideVisibleTopContainer If true, hides container when list is empty
+ * @param block The rendering function for each item, receiving index and item
  */
 @JvmName("hasComponentsMapIndexedSignal")
 fun <T, MAPPED_COMP, PARENT> PARENT.mapIndexed(
