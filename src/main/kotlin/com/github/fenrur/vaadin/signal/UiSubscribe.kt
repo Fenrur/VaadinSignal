@@ -3,6 +3,7 @@ package com.github.fenrur.vaadin.signal
 import com.github.fenrur.signal.Signal
 import com.github.fenrur.signal.UnSubscriber
 import com.vaadin.flow.component.AttachNotifier
+import com.vaadin.flow.component.Component
 import com.vaadin.flow.component.DetachNotifier
 import com.vaadin.flow.component.UI
 import java.util.concurrent.atomic.AtomicReference
@@ -25,12 +26,22 @@ fun <T, A> A.uiSubscribe(
         block(Result.success(signal.value))
     }
     val unsubscribeRef = AtomicReference<UnSubscriber> {}
-    addAttachListener {
+
+    fun startSubscription() {
         unsubscribeRef.set(signal.subscribe { result ->
             if (ui.isAttached) ui.immediateOrAccess {
                 block(result)
             }
         })
+    }
+
+    // If already attached, start subscription immediately
+    if (this is Component && this.isAttached) {
+        startSubscription()
+    }
+
+    addAttachListener {
+        startSubscription()
     }
     addDetachListener {
         unsubscribeRef.getAndSet {}.invoke()

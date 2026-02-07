@@ -13,46 +13,49 @@ import com.vaadin.flow.component.button.ButtonVariant
  * Reactive icon for Button.
  */
 @JvmName("buttonIconSignal")
-fun Button.icon(signal: Signal<Component?>) {
+fun Button.icon(signal: Signal<Component?>): Button {
     fun apply(icon: Component?) {
         setIcon(icon)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive icon position (after text or before).
  */
 @JvmName("buttonIconAfterTextSignal")
-fun Button.iconAfterText(signal: Signal<Boolean>) {
+fun Button.iconAfterText(signal: Signal<Boolean>): Button {
     fun apply(after: Boolean) {
         setIconAfterText(after)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive disableOnClick for Button.
  */
 @JvmName("buttonDisableOnClickSignal")
-fun Button.disableOnClick(signal: Signal<Boolean>) {
+fun Button.disableOnClick(signal: Signal<Boolean>): Button {
     fun apply(disable: Boolean) {
         setDisableOnClick(disable)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for Button.
  */
 @JvmName("buttonThemeVariantsSignal")
-fun Button.themeVariants(signal: Signal<Set<ButtonVariant>>) {
+fun Button.themeVariants(signal: Signal<Set<ButtonVariant>>): Button {
     var previousVariants = emptySet<ButtonVariant>()
 
     fun apply(variants: Set<ButtonVariant>) {
@@ -63,13 +66,14 @@ fun Button.themeVariants(signal: Signal<Set<ButtonVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for Button.
  */
 @JvmName("buttonThemeVariantSignal")
-fun Button.themeVariant(signal: Signal<ButtonVariant?>) {
+fun Button.themeVariant(signal: Signal<ButtonVariant?>): Button {
     var previousVariant: ButtonVariant? = null
 
     fun apply(variant: ButtonVariant?) {
@@ -80,13 +84,14 @@ fun Button.themeVariant(signal: Signal<ButtonVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive primary theme for Button.
  */
 @JvmName("buttonPrimarySignal")
-fun Button.primary(signal: Signal<Boolean>) {
+fun Button.primary(signal: Signal<Boolean>): Button {
     fun apply(isPrimary: Boolean) {
         if (isPrimary) {
             addThemeVariants(ButtonVariant.LUMO_PRIMARY)
@@ -97,13 +102,14 @@ fun Button.primary(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tertiary theme for Button.
  */
 @JvmName("buttonTertiarySignal")
-fun Button.tertiary(signal: Signal<Boolean>) {
+fun Button.tertiary(signal: Signal<Boolean>): Button {
     fun apply(isTertiary: Boolean) {
         if (isTertiary) {
             addThemeVariants(ButtonVariant.LUMO_TERTIARY)
@@ -114,13 +120,14 @@ fun Button.tertiary(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tertiary-inline theme for Button.
  */
 @JvmName("buttonTertiaryInlineSignal")
-fun Button.tertiaryInline(signal: Signal<Boolean>) {
+fun Button.tertiaryInline(signal: Signal<Boolean>): Button {
     fun apply(isTertiaryInline: Boolean) {
         if (isTertiaryInline) {
             addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE)
@@ -131,13 +138,14 @@ fun Button.tertiaryInline(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive small size for Button.
  */
 @JvmName("buttonSmallSignal")
-fun Button.small(signal: Signal<Boolean>) {
+fun Button.small(signal: Signal<Boolean>): Button {
     fun apply(isSmall: Boolean) {
         if (isSmall) {
             addThemeVariants(ButtonVariant.LUMO_SMALL)
@@ -148,13 +156,14 @@ fun Button.small(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive large size for Button.
  */
 @JvmName("buttonLargeSignal")
-fun Button.large(signal: Signal<Boolean>) {
+fun Button.large(signal: Signal<Boolean>): Button {
     fun apply(isLarge: Boolean) {
         if (isLarge) {
             addThemeVariants(ButtonVariant.LUMO_LARGE)
@@ -165,13 +174,14 @@ fun Button.large(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive error theme for Button.
  */
 @JvmName("buttonErrorSignal")
-fun Button.error(signal: Signal<Boolean>) {
+fun Button.error(signal: Signal<Boolean>): Button {
     fun apply(isError: Boolean) {
         if (isError) {
             addThemeVariants(ButtonVariant.LUMO_ERROR)
@@ -182,13 +192,14 @@ fun Button.error(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive success theme for Button.
  */
 @JvmName("buttonSuccessSignal")
-fun Button.success(signal: Signal<Boolean>) {
+fun Button.success(signal: Signal<Boolean>): Button {
     fun apply(isSuccess: Boolean) {
         if (isSuccess) {
             addThemeVariants(ButtonVariant.LUMO_SUCCESS)
@@ -199,13 +210,14 @@ fun Button.success(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive contrast theme for Button.
  */
 @JvmName("buttonContrastSignal")
-fun Button.contrast(signal: Signal<Boolean>) {
+fun Button.contrast(signal: Signal<Boolean>): Button {
     fun apply(isContrast: Boolean) {
         if (isContrast) {
             addThemeVariants(ButtonVariant.LUMO_CONTRAST)
@@ -216,4 +228,5 @@ fun Button.contrast(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

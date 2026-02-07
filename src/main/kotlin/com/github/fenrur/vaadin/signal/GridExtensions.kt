@@ -15,20 +15,21 @@ import com.vaadin.flow.data.provider.DataProvider
  * Reactive DataProvider for Grid.
  */
 @JvmName("gridDataProviderSignal")
-fun <T> Grid<T>.dataProvider(signal: Signal<DataProvider<T, *>>) {
+fun <T> Grid<T>.dataProvider(signal: Signal<DataProvider<T, *>>): Grid<T> {
     fun apply(provider: DataProvider<T, *>) {
         setDataProvider(provider)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Two-way binding for Grid single selection.
  */
 @JvmName("gridSelectedItemMutableSignal")
-fun <T> Grid<T>.selectedItem(signal: MutableSignal<T?>) {
+fun <T> Grid<T>.selectedItem(signal: MutableSignal<T?>): Grid<T> {
     val singleSelect = asSingleSelect()
     singleSelect.value = signal.value
 
@@ -39,13 +40,14 @@ fun <T> Grid<T>.selectedItem(signal: MutableSignal<T?>) {
     effect(signal) {
         singleSelect.value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for Grid multi selection.
  */
 @JvmName("gridSelectedItemsMutableSignal")
-fun <T> Grid<T>.selectedItems(signal: MutableSignal<Set<T>>) {
+fun <T> Grid<T>.selectedItems(signal: MutableSignal<Set<T>>): Grid<T> {
     setSelectionMode(Grid.SelectionMode.MULTI)
     val multiSelect = selectionModel as GridMultiSelectionModel<T>
 
@@ -59,26 +61,28 @@ fun <T> Grid<T>.selectedItems(signal: MutableSignal<Set<T>>) {
         multiSelect.deselectAll()
         it.forEach { item -> multiSelect.select(item) }
     }
+    return this
 }
 
 /**
  * Reactive selection mode for Grid.
  */
 @JvmName("gridSelectionModeSignal")
-fun <T> Grid<T>.selectionMode(signal: Signal<Grid.SelectionMode>) {
+fun <T> Grid<T>.selectionMode(signal: Signal<Grid.SelectionMode>): Grid<T> {
     fun apply(mode: Grid.SelectionMode) {
         setSelectionMode(mode)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive alternating rows theme for Grid.
  */
 @JvmName("gridAlternatingRowsSignal")
-fun <T> Grid<T>.alternatingRows(signal: Signal<Boolean>) {
+fun <T> Grid<T>.alternatingRows(signal: Signal<Boolean>): Grid<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(GridVariant.LUMO_ROW_STRIPES)
@@ -89,13 +93,14 @@ fun <T> Grid<T>.alternatingRows(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive compact theme for Grid.
  */
 @JvmName("gridCompactSignal")
-fun <T> Grid<T>.compact(signal: Signal<Boolean>) {
+fun <T> Grid<T>.compact(signal: Signal<Boolean>): Grid<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(GridVariant.LUMO_COMPACT)
@@ -106,13 +111,14 @@ fun <T> Grid<T>.compact(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive column borders for Grid.
  */
 @JvmName("gridColumnBordersSignal")
-fun <T> Grid<T>.columnBorders(signal: Signal<Boolean>) {
+fun <T> Grid<T>.columnBorders(signal: Signal<Boolean>): Grid<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS)
@@ -123,30 +129,33 @@ fun <T> Grid<T>.columnBorders(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive column reordering for Grid.
  */
 @JvmName("gridColumnReorderingSignal")
-fun <T> Grid<T>.columnReordering(signal: Signal<Boolean>) {
+fun <T> Grid<T>.columnReordering(signal: Signal<Boolean>): Grid<T> {
     fun apply(enabled: Boolean) {
         isColumnReorderingAllowed = enabled
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive loading state for Grid.
  */
 @JvmName("gridLoadingSignal")
-fun <T> Grid<T>.loading(signal: Signal<Boolean>) {
+fun <T> Grid<T>.loading(signal: Signal<Boolean>): Grid<T> {
     fun apply(isLoading: Boolean) {
         element.setProperty("loading", isLoading)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

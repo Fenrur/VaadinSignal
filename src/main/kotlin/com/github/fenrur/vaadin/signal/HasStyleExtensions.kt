@@ -42,7 +42,7 @@ private fun parseClassNames(className: String?): Set<String> {
  * @throws IllegalArgumentException if a parameter is neither a [String] nor a [Signal]
  */
 @JvmName("hasStyleClassNameSignal")
-fun <A> A.className(vararg classNamesElements: Any) where A : HasStyle, A : AttachNotifier, A : DetachNotifier {
+fun <A> A.className(vararg classNamesElements: Any): A where A : HasStyle, A : AttachNotifier, A : DetachNotifier {
     val hasInvalidType = classNamesElements.any { it !is String && it !is Signal<*> }
     require(!hasInvalidType) {
         "className() only accepts String or Signal<String> parameters, but got: ${classNamesElements.map { it::class.simpleName }}"
@@ -77,13 +77,14 @@ fun <A> A.className(vararg classNamesElements: Any) where A : HasStyle, A : Atta
             }
         }
     }
+    return this
 }
 
 /**
  * Reactively adds/removes a CSS class based on a boolean condition.
  */
 @JvmName("hasStyleClassNameWhenSignal")
-fun <C> C.classNameWhen(className: String, signal: Signal<Boolean>)
+fun <C> C.classNameWhen(className: String, signal: Signal<Boolean>): C
         where C : HasStyle, C : AttachNotifier, C : DetachNotifier {
     effect(signal, initialCall = true) { hasClass ->
         if (hasClass) {
@@ -92,15 +93,17 @@ fun <C> C.classNameWhen(className: String, signal: Signal<Boolean>)
             removeClassName(className)
         }
     }
+    return this
 }
 
 /**
  * Reactively sets an inline CSS style property.
  */
 @JvmName("hasStyleStyleSignal")
-fun <C> C.style(property: String, signal: Signal<String>)
+fun <C> C.style(property: String, signal: Signal<String>): C
         where C : HasStyle, C : AttachNotifier, C : DetachNotifier {
     effect(signal, initialCall = true) { value ->
         style.set(property, value)
     }
+    return this
 }

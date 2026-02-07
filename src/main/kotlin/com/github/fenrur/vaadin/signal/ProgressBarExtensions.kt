@@ -12,46 +12,49 @@ import com.vaadin.flow.component.progressbar.ProgressBarVariant
  * Reactive min for ProgressBar.
  */
 @JvmName("progressBarMinSignal")
-fun ProgressBar.min(signal: Signal<Double>) {
+fun ProgressBar.min(signal: Signal<Double>): ProgressBar {
     fun apply(min: Double) {
         setMin(min)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive max for ProgressBar.
  */
 @JvmName("progressBarMaxSignal")
-fun ProgressBar.max(signal: Signal<Double>) {
+fun ProgressBar.max(signal: Signal<Double>): ProgressBar {
     fun apply(max: Double) {
         setMax(max)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive indeterminate state for ProgressBar.
  */
 @JvmName("progressBarIndeterminateSignal")
-fun ProgressBar.indeterminate(signal: Signal<Boolean>) {
+fun ProgressBar.indeterminate(signal: Signal<Boolean>): ProgressBar {
     fun apply(indeterminate: Boolean) {
         isIndeterminate = indeterminate
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for ProgressBar.
  */
 @JvmName("progressBarThemeVariantsSignal")
-fun ProgressBar.themeVariants(signal: Signal<Set<ProgressBarVariant>>) {
+fun ProgressBar.themeVariants(signal: Signal<Set<ProgressBarVariant>>): ProgressBar {
     var previousVariants = emptySet<ProgressBarVariant>()
 
     fun apply(variants: Set<ProgressBarVariant>) {
@@ -62,13 +65,14 @@ fun ProgressBar.themeVariants(signal: Signal<Set<ProgressBarVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for ProgressBar.
  */
 @JvmName("progressBarThemeVariantSignal")
-fun ProgressBar.themeVariant(signal: Signal<ProgressBarVariant?>) {
+fun ProgressBar.themeVariant(signal: Signal<ProgressBarVariant?>): ProgressBar {
     var previousVariant: ProgressBarVariant? = null
 
     fun apply(variant: ProgressBarVariant?) {
@@ -79,13 +83,14 @@ fun ProgressBar.themeVariant(signal: Signal<ProgressBarVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive contrast theme for ProgressBar.
  */
 @JvmName("progressBarContrastSignal")
-fun ProgressBar.contrast(signal: Signal<Boolean>) {
+fun ProgressBar.contrast(signal: Signal<Boolean>): ProgressBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(ProgressBarVariant.LUMO_CONTRAST)
@@ -96,13 +101,14 @@ fun ProgressBar.contrast(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive error theme for ProgressBar.
  */
 @JvmName("progressBarErrorSignal")
-fun ProgressBar.error(signal: Signal<Boolean>) {
+fun ProgressBar.error(signal: Signal<Boolean>): ProgressBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(ProgressBarVariant.LUMO_ERROR)
@@ -113,13 +119,14 @@ fun ProgressBar.error(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive success theme for ProgressBar.
  */
 @JvmName("progressBarSuccessSignal")
-fun ProgressBar.success(signal: Signal<Boolean>) {
+fun ProgressBar.success(signal: Signal<Boolean>): ProgressBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(ProgressBarVariant.LUMO_SUCCESS)
@@ -130,4 +137,5 @@ fun ProgressBar.success(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

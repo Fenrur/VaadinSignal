@@ -11,8 +11,9 @@ import com.vaadin.flow.component.messages.MessageInput
  * The signal will be updated with the submitted message.
  */
 @JvmName("messageInputOnSubmitMutableSignal")
-fun MessageInput.onSubmit(signal: MutableSignal<String?>) {
+fun MessageInput.onSubmit(signal: MutableSignal<String?>): MessageInput {
     addSubmitListener { event ->
         signal.value = event.value
     }
+    return this
 }

@@ -12,11 +12,12 @@ import com.vaadin.flow.data.provider.DataProvider
  * Reactive DataProvider for MultiSelectListBox.
  */
 @JvmName("multiSelectListBoxDataProviderSignal")
-fun <T> MultiSelectListBox<T>.dataProvider(signal: Signal<DataProvider<T, *>>) {
+fun <T> MultiSelectListBox<T>.dataProvider(signal: Signal<DataProvider<T, *>>): MultiSelectListBox<T> {
     fun apply(provider: DataProvider<T, *>) {
         setDataProvider(provider)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

@@ -55,26 +55,28 @@ fun HorizontalLayout.margin(signal: Signal<Boolean>): HorizontalLayout {
  * Reactive justify content for HorizontalLayout.
  */
 @JvmName("horizontalLayoutJustifyContentSignal")
-fun HorizontalLayout.justifyContent(signal: Signal<FlexComponent.JustifyContentMode>) {
+fun HorizontalLayout.justifyContent(signal: Signal<FlexComponent.JustifyContentMode>): HorizontalLayout {
     fun apply(mode: FlexComponent.JustifyContentMode) {
         justifyContentMode = mode
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive align items for HorizontalLayout.
  */
 @JvmName("horizontalLayoutAlignItemsSignal")
-fun HorizontalLayout.alignItems(signal: Signal<FlexComponent.Alignment>) {
+fun HorizontalLayout.alignItems(signal: Signal<FlexComponent.Alignment>): HorizontalLayout {
     fun apply(alignment: FlexComponent.Alignment) {
         setDefaultVerticalComponentAlignment(alignment)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**

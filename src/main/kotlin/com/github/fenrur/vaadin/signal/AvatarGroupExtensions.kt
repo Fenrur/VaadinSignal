@@ -12,33 +12,35 @@ import com.vaadin.flow.component.avatar.AvatarGroupVariant
  * Reactive items for AvatarGroup.
  */
 @JvmName("avatarGroupItemsSignal")
-fun AvatarGroup.items(signal: Signal<List<AvatarGroup.AvatarGroupItem>>) {
+fun AvatarGroup.items(signal: Signal<List<AvatarGroup.AvatarGroupItem>>): AvatarGroup {
     fun apply(items: List<AvatarGroup.AvatarGroupItem>) {
         setItems(items)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive max items visible for AvatarGroup.
  */
 @JvmName("avatarGroupMaxItemsVisibleSignal")
-fun AvatarGroup.maxItemsVisible(signal: Signal<Int?>) {
+fun AvatarGroup.maxItemsVisible(signal: Signal<Int?>): AvatarGroup {
     fun apply(max: Int?) {
         setMaxItemsVisible(max)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for AvatarGroup.
  */
 @JvmName("avatarGroupThemeVariantsSignal")
-fun AvatarGroup.themeVariants(signal: Signal<Set<AvatarGroupVariant>>) {
+fun AvatarGroup.themeVariants(signal: Signal<Set<AvatarGroupVariant>>): AvatarGroup {
     var previousVariants = emptySet<AvatarGroupVariant>()
 
     fun apply(variants: Set<AvatarGroupVariant>) {
@@ -49,13 +51,14 @@ fun AvatarGroup.themeVariants(signal: Signal<Set<AvatarGroupVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for AvatarGroup.
  */
 @JvmName("avatarGroupThemeVariantSignal")
-fun AvatarGroup.themeVariant(signal: Signal<AvatarGroupVariant?>) {
+fun AvatarGroup.themeVariant(signal: Signal<AvatarGroupVariant?>): AvatarGroup {
     var previousVariant: AvatarGroupVariant? = null
 
     fun apply(variant: AvatarGroupVariant?) {
@@ -66,13 +69,14 @@ fun AvatarGroup.themeVariant(signal: Signal<AvatarGroupVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive extra large theme for AvatarGroup.
  */
 @JvmName("avatarGroupExtraLargeSignal")
-fun AvatarGroup.extraLarge(signal: Signal<Boolean>) {
+fun AvatarGroup.extraLarge(signal: Signal<Boolean>): AvatarGroup {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(AvatarGroupVariant.LUMO_XLARGE)
@@ -83,13 +87,14 @@ fun AvatarGroup.extraLarge(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive large theme for AvatarGroup.
  */
 @JvmName("avatarGroupLargeSignal")
-fun AvatarGroup.large(signal: Signal<Boolean>) {
+fun AvatarGroup.large(signal: Signal<Boolean>): AvatarGroup {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(AvatarGroupVariant.LUMO_LARGE)
@@ -100,13 +105,14 @@ fun AvatarGroup.large(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive small theme for AvatarGroup.
  */
 @JvmName("avatarGroupSmallSignal")
-fun AvatarGroup.small(signal: Signal<Boolean>) {
+fun AvatarGroup.small(signal: Signal<Boolean>): AvatarGroup {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(AvatarGroupVariant.LUMO_SMALL)
@@ -117,13 +123,14 @@ fun AvatarGroup.small(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive extra small theme for AvatarGroup.
  */
 @JvmName("avatarGroupExtraSmallSignal")
-fun AvatarGroup.extraSmall(signal: Signal<Boolean>) {
+fun AvatarGroup.extraSmall(signal: Signal<Boolean>): AvatarGroup {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(AvatarGroupVariant.LUMO_XSMALL)
@@ -134,4 +141,5 @@ fun AvatarGroup.extraSmall(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

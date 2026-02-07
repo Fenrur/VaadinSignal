@@ -15,7 +15,7 @@ import com.vaadin.flow.component.notification.NotificationVariant
  * Two-way binding for Notification opened state.
  */
 @JvmName("notificationOpenedMutableSignal")
-fun Notification.opened(signal: MutableSignal<Boolean>) {
+fun Notification.opened(signal: MutableSignal<Boolean>): Notification {
     isOpened = signal.value
 
     addOpenedChangeListener { event ->
@@ -25,32 +25,35 @@ fun Notification.opened(signal: MutableSignal<Boolean>) {
     effect(signal) {
         isOpened = it
     }
+    return this
 }
 
 /**
  * Reactive duration for Notification.
  */
 @JvmName("notificationDurationSignal")
-fun Notification.duration(signal: Signal<Int>) {
+fun Notification.duration(signal: Signal<Int>): Notification {
     fun apply(duration: Int) {
         setDuration(duration)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive position for Notification.
  */
 @JvmName("notificationPositionSignal")
-fun Notification.position(signal: Signal<Notification.Position>) {
+fun Notification.position(signal: Signal<Notification.Position>): Notification {
     fun apply(position: Notification.Position) {
         setPosition(position)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**

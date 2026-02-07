@@ -17,7 +17,7 @@ import com.vaadin.flow.component.HasText
  * This function sets the component's own text content via `setText()`.
  */
 @JvmName("hasTextTextContentSignal")
-fun <C> C.textContent(signal: Signal<String?>)
+fun <C> C.textContent(signal: Signal<String?>): C
         where C : HasText, C : AttachNotifier, C : DetachNotifier {
     fun apply(text: String?) {
         setText(text)
@@ -25,13 +25,14 @@ fun <C> C.textContent(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive whitespace mode for any component implementing HasText.
  */
 @JvmName("hasTextWhitespaceSignal")
-fun <C> C.whitespace(signal: Signal<HasText.WhiteSpace?>)
+fun <C> C.whitespace(signal: Signal<HasText.WhiteSpace?>): C
         where C : HasText, C : AttachNotifier, C : DetachNotifier {
     fun apply(whitespace: HasText.WhiteSpace?) {
         setWhiteSpace(whitespace)
@@ -39,4 +40,5 @@ fun <C> C.whitespace(signal: Signal<HasText.WhiteSpace?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

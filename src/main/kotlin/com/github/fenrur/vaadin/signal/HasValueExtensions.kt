@@ -27,15 +27,16 @@ fun <C, E : HasValue.ValueChangeEvent<V>, V> C.value(signal: Signal<V>): C
 @JvmName("hasValueValueMutableSignal")
 fun <C, E : HasValue.ValueChangeEvent<V>, V> C.value(signal: MutableSignal<V>): C
         where C : HasValue<E, V>, C : AttachNotifier, C : DetachNotifier {
-    setValue(signal.value)
+    value = signal.value
 
     addValueChangeListener { event ->
         signal.value = event.value
     }
 
     effect(signal) {
-        setValue(it)
+        value = it
     }
+
     return this
 }
 

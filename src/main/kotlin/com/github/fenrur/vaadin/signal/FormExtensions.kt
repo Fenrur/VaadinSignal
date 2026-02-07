@@ -20,7 +20,7 @@ import java.time.LocalTime
  * Two-way binding for Checkbox checked state.
  */
 @JvmName("checkboxCheckedMutableSignal")
-fun Checkbox.checked(signal: MutableSignal<Boolean>) {
+fun Checkbox.checked(signal: MutableSignal<Boolean>): Checkbox {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -30,13 +30,14 @@ fun Checkbox.checked(signal: MutableSignal<Boolean>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for Select selected item.
  */
 @JvmName("selectSelectedItemMutableSignal")
-fun <T> Select<T>.selectedItem(signal: MutableSignal<T?>) {
+fun <T> Select<T>.selectedItem(signal: MutableSignal<T?>): Select<T> {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -46,13 +47,14 @@ fun <T> Select<T>.selectedItem(signal: MutableSignal<T?>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for ComboBox selected item.
  */
 @JvmName("comboBoxSelectedItemMutableSignal")
-fun <T> ComboBox<T>.selectedItem(signal: MutableSignal<T?>) {
+fun <T> ComboBox<T>.selectedItem(signal: MutableSignal<T?>): ComboBox<T> {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -62,13 +64,14 @@ fun <T> ComboBox<T>.selectedItem(signal: MutableSignal<T?>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for MultiSelectComboBox selected items.
  */
 @JvmName("multiSelectComboBoxSelectedItemsMutableSignal")
-fun <T> MultiSelectComboBox<T>.selectedItems(signal: MutableSignal<Set<T>>) {
+fun <T> MultiSelectComboBox<T>.selectedItems(signal: MutableSignal<Set<T>>): MultiSelectComboBox<T> {
     fun apply(items: Set<T>) {
         value = items
     }
@@ -80,13 +83,14 @@ fun <T> MultiSelectComboBox<T>.selectedItems(signal: MutableSignal<Set<T>>) {
     }
 
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Two-way binding for DatePicker.
  */
 @JvmName("datePickerSelectedDateMutableSignal")
-fun DatePicker.selectedDate(signal: MutableSignal<LocalDate?>) {
+fun DatePicker.selectedDate(signal: MutableSignal<LocalDate?>): DatePicker {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -96,13 +100,14 @@ fun DatePicker.selectedDate(signal: MutableSignal<LocalDate?>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for TimePicker.
  */
 @JvmName("timePickerSelectedTimeMutableSignal")
-fun TimePicker.selectedTime(signal: MutableSignal<LocalTime?>) {
+fun TimePicker.selectedTime(signal: MutableSignal<LocalTime?>): TimePicker {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -112,13 +117,14 @@ fun TimePicker.selectedTime(signal: MutableSignal<LocalTime?>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 
 /**
  * Two-way binding for DateTimePicker.
  */
 @JvmName("dateTimePickerSelectedDateTimeMutableSignal")
-fun DateTimePicker.selectedDateTime(signal: MutableSignal<LocalDateTime?>) {
+fun DateTimePicker.selectedDateTime(signal: MutableSignal<LocalDateTime?>): DateTimePicker {
     value = signal.value
 
     addValueChangeListener { event ->
@@ -128,5 +134,6 @@ fun DateTimePicker.selectedDateTime(signal: MutableSignal<LocalDateTime?>) {
     effect(signal) {
         value = it
     }
+    return this
 }
 

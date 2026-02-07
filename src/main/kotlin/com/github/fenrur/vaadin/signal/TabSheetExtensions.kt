@@ -14,20 +14,21 @@ import com.vaadin.flow.component.tabs.TabSheetVariant
  * Note: This is a one-way binding (signal to component).
  */
 @JvmName("tabSheetSelectedIndexSignal")
-fun TabSheet.selectedIndex(signal: Signal<Int>) {
+fun TabSheet.selectedIndex(signal: Signal<Int>): TabSheet {
     fun apply(index: Int) {
         setSelectedIndex(index)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Two-way binding for TabSheet selected index.
  */
 @JvmName("tabSheetSelectedIndexMutableSignal")
-fun TabSheet.selectedIndex(signal: MutableSignal<Int>) {
+fun TabSheet.selectedIndex(signal: MutableSignal<Int>): TabSheet {
     selectedIndex = signal.value
 
     addSelectedChangeListener {
@@ -37,13 +38,14 @@ fun TabSheet.selectedIndex(signal: MutableSignal<Int>) {
     effect(signal) {
         selectedIndex = it
     }
+    return this
 }
 
 /**
  * Reactive theme variants for TabSheet.
  */
 @JvmName("tabSheetThemeVariantsSignal")
-fun TabSheet.themeVariants(signal: Signal<Set<TabSheetVariant>>) {
+fun TabSheet.themeVariants(signal: Signal<Set<TabSheetVariant>>): TabSheet {
     var previousVariants = emptySet<TabSheetVariant>()
 
     fun apply(variants: Set<TabSheetVariant>) {
@@ -54,13 +56,14 @@ fun TabSheet.themeVariants(signal: Signal<Set<TabSheetVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for TabSheet.
  */
 @JvmName("tabSheetThemeVariantSignal")
-fun TabSheet.themeVariant(signal: Signal<TabSheetVariant?>) {
+fun TabSheet.themeVariant(signal: Signal<TabSheetVariant?>): TabSheet {
     var previousVariant: TabSheetVariant? = null
 
     fun apply(variant: TabSheetVariant?) {
@@ -71,13 +74,14 @@ fun TabSheet.themeVariant(signal: Signal<TabSheetVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive bordered theme for TabSheet.
  */
 @JvmName("tabSheetBorderedSignal")
-fun TabSheet.bordered(signal: Signal<Boolean>) {
+fun TabSheet.bordered(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_BORDERED)
@@ -88,13 +92,14 @@ fun TabSheet.bordered(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive no padding theme for TabSheet.
  */
 @JvmName("tabSheetNoPaddingSignal")
-fun TabSheet.noPadding(signal: Signal<Boolean>) {
+fun TabSheet.noPadding(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_NO_PADDING)
@@ -105,13 +110,14 @@ fun TabSheet.noPadding(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tabs centered theme for TabSheet.
  */
 @JvmName("tabSheetTabsCenteredSignal")
-fun TabSheet.tabsCentered(signal: Signal<Boolean>) {
+fun TabSheet.tabsCentered(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_TABS_CENTERED)
@@ -122,13 +128,14 @@ fun TabSheet.tabsCentered(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tabs small theme for TabSheet.
  */
 @JvmName("tabSheetTabsSmallSignal")
-fun TabSheet.tabsSmall(signal: Signal<Boolean>) {
+fun TabSheet.tabsSmall(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_TABS_SMALL)
@@ -139,13 +146,14 @@ fun TabSheet.tabsSmall(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tabs minimal theme for TabSheet.
  */
 @JvmName("tabSheetTabsMinimalSignal")
-fun TabSheet.tabsMinimal(signal: Signal<Boolean>) {
+fun TabSheet.tabsMinimal(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_TABS_MINIMAL)
@@ -156,13 +164,14 @@ fun TabSheet.tabsMinimal(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tabs equal width theme for TabSheet.
  */
 @JvmName("tabSheetTabsEqualWidthSignal")
-fun TabSheet.tabsEqualWidth(signal: Signal<Boolean>) {
+fun TabSheet.tabsEqualWidth(signal: Signal<Boolean>): TabSheet {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabSheetVariant.LUMO_TABS_EQUAL_WIDTH_TABS)
@@ -173,4 +182,5 @@ fun TabSheet.tabsEqualWidth(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

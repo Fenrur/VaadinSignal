@@ -14,7 +14,7 @@ import com.vaadin.flow.component.HasSize
  * Reactive width for any component implementing HasSize.
  */
 @JvmName("hasSizeWidthSignal")
-fun <C> C.width(signal: Signal<String>)
+fun <C> C.width(signal: Signal<String>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(width: String) {
         setWidth(width)
@@ -22,13 +22,14 @@ fun <C> C.width(signal: Signal<String>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive nullable width for any component implementing HasSize.
  */
 @JvmName("hasSizeWidthNullableSignal")
-fun <C> C.width(signal: Signal<String?>)
+fun <C> C.width(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(width: String?) {
         setWidth(width)
@@ -36,13 +37,14 @@ fun <C> C.width(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive height for any component implementing HasSize.
  */
 @JvmName("hasSizeHeightSignal")
-fun <C> C.height(signal: Signal<String>)
+fun <C> C.height(signal: Signal<String>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(height: String) {
         setHeight(height)
@@ -50,13 +52,14 @@ fun <C> C.height(signal: Signal<String>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive nullable height for any component implementing HasSize.
  */
 @JvmName("hasSizeHeightNullableSignal")
-fun <C> C.height(signal: Signal<String?>)
+fun <C> C.height(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(height: String?) {
         setHeight(height)
@@ -64,13 +67,14 @@ fun <C> C.height(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive min-width for any component implementing HasSize.
  */
 @JvmName("hasSizeMinWidthSignal")
-fun <C> C.minWidth(signal: Signal<String?>)
+fun <C> C.minWidth(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(minWidth: String?) {
         setMinWidth(minWidth)
@@ -78,13 +82,14 @@ fun <C> C.minWidth(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive max-width for any component implementing HasSize.
  */
 @JvmName("hasSizeMaxWidthSignal")
-fun <C> C.maxWidth(signal: Signal<String?>)
+fun <C> C.maxWidth(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(maxWidth: String?) {
         setMaxWidth(maxWidth)
@@ -92,13 +97,14 @@ fun <C> C.maxWidth(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive min-height for any component implementing HasSize.
  */
 @JvmName("hasSizeMinHeightSignal")
-fun <C> C.minHeight(signal: Signal<String?>)
+fun <C> C.minHeight(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(minHeight: String?) {
         setMinHeight(minHeight)
@@ -106,13 +112,14 @@ fun <C> C.minHeight(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive max-height for any component implementing HasSize.
  */
 @JvmName("hasSizeMaxHeightSignal")
-fun <C> C.maxHeight(signal: Signal<String?>)
+fun <C> C.maxHeight(signal: Signal<String?>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(maxHeight: String?) {
         setMaxHeight(maxHeight)
@@ -120,13 +127,14 @@ fun <C> C.maxHeight(signal: Signal<String?>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive size full for any component implementing HasSize.
  */
 @JvmName("hasSizeSizeFullSignal")
-fun <C> C.sizeFull(signal: Signal<Boolean>)
+fun <C> C.sizeFull(signal: Signal<Boolean>): C
         where C : HasSize, C : AttachNotifier, C : DetachNotifier {
     fun apply(full: Boolean) {
         if (full) {
@@ -138,4 +146,5 @@ fun <C> C.sizeFull(signal: Signal<Boolean>)
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

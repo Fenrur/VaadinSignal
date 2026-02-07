@@ -12,20 +12,21 @@ import com.vaadin.flow.component.orderedlayout.ScrollerVariant
  * Reactive scroll direction for Scroller.
  */
 @JvmName("scrollerScrollDirectionSignal")
-fun Scroller.scrollDirection(signal: Signal<Scroller.ScrollDirection>) {
+fun Scroller.scrollDirection(signal: Signal<Scroller.ScrollDirection>): Scroller {
     fun apply(direction: Scroller.ScrollDirection) {
         setScrollDirection(direction)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for Scroller.
  */
 @JvmName("scrollerThemeVariantsSignal")
-fun Scroller.themeVariants(signal: Signal<Set<ScrollerVariant>>) {
+fun Scroller.themeVariants(signal: Signal<Set<ScrollerVariant>>): Scroller {
     var previousVariants = emptySet<ScrollerVariant>()
 
     fun apply(variants: Set<ScrollerVariant>) {
@@ -36,13 +37,14 @@ fun Scroller.themeVariants(signal: Signal<Set<ScrollerVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for Scroller.
  */
 @JvmName("scrollerThemeVariantSignal")
-fun Scroller.themeVariant(signal: Signal<ScrollerVariant?>) {
+fun Scroller.themeVariant(signal: Signal<ScrollerVariant?>): Scroller {
     var previousVariant: ScrollerVariant? = null
 
     fun apply(variant: ScrollerVariant?) {
@@ -53,13 +55,14 @@ fun Scroller.themeVariant(signal: Signal<ScrollerVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive overflow indicators for Scroller.
  */
 @JvmName("scrollerOverflowIndicatorsSignal")
-fun Scroller.overflowIndicators(signal: Signal<Boolean>) {
+fun Scroller.overflowIndicators(signal: Signal<Boolean>): Scroller {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(ScrollerVariant.LUMO_OVERFLOW_INDICATORS)
@@ -70,4 +73,5 @@ fun Scroller.overflowIndicators(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

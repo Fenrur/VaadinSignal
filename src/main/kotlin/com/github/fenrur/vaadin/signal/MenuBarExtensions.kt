@@ -12,20 +12,21 @@ import com.vaadin.flow.component.menubar.MenuBarVariant
  * Reactive open on hover for MenuBar.
  */
 @JvmName("menuBarOpenOnHoverSignal")
-fun MenuBar.openOnHover(signal: Signal<Boolean>) {
+fun MenuBar.openOnHover(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         isOpenOnHover = enabled
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for MenuBar.
  */
 @JvmName("menuBarThemeVariantsSignal")
-fun MenuBar.themeVariants(signal: Signal<Set<MenuBarVariant>>) {
+fun MenuBar.themeVariants(signal: Signal<Set<MenuBarVariant>>): MenuBar {
     var previousVariants = emptySet<MenuBarVariant>()
 
     fun apply(variants: Set<MenuBarVariant>) {
@@ -36,13 +37,14 @@ fun MenuBar.themeVariants(signal: Signal<Set<MenuBarVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for MenuBar.
  */
 @JvmName("menuBarThemeVariantSignal")
-fun MenuBar.themeVariant(signal: Signal<MenuBarVariant?>) {
+fun MenuBar.themeVariant(signal: Signal<MenuBarVariant?>): MenuBar {
     var previousVariant: MenuBarVariant? = null
 
     fun apply(variant: MenuBarVariant?) {
@@ -53,13 +55,14 @@ fun MenuBar.themeVariant(signal: Signal<MenuBarVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tertiary theme for MenuBar.
  */
 @JvmName("menuBarTertiarySignal")
-fun MenuBar.tertiary(signal: Signal<Boolean>) {
+fun MenuBar.tertiary(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(MenuBarVariant.LUMO_TERTIARY)
@@ -70,13 +73,14 @@ fun MenuBar.tertiary(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive tertiary-inline theme for MenuBar.
  */
 @JvmName("menuBarTertiaryInlineSignal")
-fun MenuBar.tertiaryInline(signal: Signal<Boolean>) {
+fun MenuBar.tertiaryInline(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(MenuBarVariant.LUMO_TERTIARY_INLINE)
@@ -87,13 +91,14 @@ fun MenuBar.tertiaryInline(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive primary theme for MenuBar.
  */
 @JvmName("menuBarPrimarySignal")
-fun MenuBar.primary(signal: Signal<Boolean>) {
+fun MenuBar.primary(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(MenuBarVariant.LUMO_PRIMARY)
@@ -104,13 +109,14 @@ fun MenuBar.primary(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive small theme for MenuBar.
  */
 @JvmName("menuBarSmallSignal")
-fun MenuBar.small(signal: Signal<Boolean>) {
+fun MenuBar.small(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(MenuBarVariant.LUMO_SMALL)
@@ -121,13 +127,14 @@ fun MenuBar.small(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive icon theme for MenuBar.
  */
 @JvmName("menuBarIconSignal")
-fun MenuBar.icon(signal: Signal<Boolean>) {
+fun MenuBar.icon(signal: Signal<Boolean>): MenuBar {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(MenuBarVariant.LUMO_ICON)
@@ -138,4 +145,5 @@ fun MenuBar.icon(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

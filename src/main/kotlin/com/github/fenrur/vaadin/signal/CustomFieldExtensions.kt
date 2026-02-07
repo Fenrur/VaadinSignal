@@ -13,7 +13,7 @@ import com.vaadin.flow.component.customfield.CustomFieldVariant
  * Reactive theme variants for CustomField.
  */
 @JvmName("customFieldThemeVariantsSignal")
-fun <T> CustomField<T>.themeVariants(signal: Signal<Set<CustomFieldVariant>>) {
+fun <T> CustomField<T>.themeVariants(signal: Signal<Set<CustomFieldVariant>>): CustomField<T> {
     var previousVariants = emptySet<CustomFieldVariant>()
 
     fun apply(variants: Set<CustomFieldVariant>) {
@@ -24,13 +24,14 @@ fun <T> CustomField<T>.themeVariants(signal: Signal<Set<CustomFieldVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for CustomField.
  */
 @JvmName("customFieldThemeVariantSignal")
-fun <T> CustomField<T>.themeVariant(signal: Signal<CustomFieldVariant?>) {
+fun <T> CustomField<T>.themeVariant(signal: Signal<CustomFieldVariant?>): CustomField<T> {
     var previousVariant: CustomFieldVariant? = null
 
     fun apply(variant: CustomFieldVariant?) {
@@ -41,13 +42,14 @@ fun <T> CustomField<T>.themeVariant(signal: Signal<CustomFieldVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive small theme for CustomField.
  */
 @JvmName("customFieldSmallSignal")
-fun <T> CustomField<T>.small(signal: Signal<Boolean>) {
+fun <T> CustomField<T>.small(signal: Signal<Boolean>): CustomField<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(CustomFieldVariant.LUMO_SMALL)
@@ -58,13 +60,14 @@ fun <T> CustomField<T>.small(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive helper above field theme for CustomField.
  */
 @JvmName("customFieldHelperAboveFieldSignal")
-fun <T> CustomField<T>.helperAboveField(signal: Signal<Boolean>) {
+fun <T> CustomField<T>.helperAboveField(signal: Signal<Boolean>): CustomField<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(CustomFieldVariant.LUMO_HELPER_ABOVE_FIELD)
@@ -75,13 +78,14 @@ fun <T> CustomField<T>.helperAboveField(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive whitespace theme for CustomField.
  */
 @JvmName("customFieldWhitespaceSignal")
-fun <T> CustomField<T>.whitespace(signal: Signal<Boolean>) {
+fun <T> CustomField<T>.whitespace(signal: Signal<Boolean>): CustomField<T> {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(CustomFieldVariant.LUMO_WHITESPACE)
@@ -92,4 +96,5 @@ fun <T> CustomField<T>.whitespace(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

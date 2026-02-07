@@ -13,7 +13,7 @@ import com.vaadin.flow.component.accordion.Accordion
  * Note: This is a one-way binding (signal to component).
  */
 @JvmName("accordionOpenedIndexSignal")
-fun Accordion.openedIndex(signal: Signal<Int?>) {
+fun Accordion.openedIndex(signal: Signal<Int?>): Accordion {
     fun apply(index: Int?) {
         if (index == null) {
             close()
@@ -24,13 +24,14 @@ fun Accordion.openedIndex(signal: Signal<Int?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Two-way binding for Accordion opened index.
  */
 @JvmName("accordionOpenedIndexMutableSignal")
-fun Accordion.openedIndex(signal: MutableSignal<Int?>) {
+fun Accordion.openedIndex(signal: MutableSignal<Int?>): Accordion {
     val index = signal.value
     if (index == null) {
         close()
@@ -50,4 +51,5 @@ fun Accordion.openedIndex(signal: MutableSignal<Int?>) {
             open(it)
         }
     }
+    return this
 }

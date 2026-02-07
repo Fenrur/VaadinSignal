@@ -12,11 +12,12 @@ import com.vaadin.flow.component.html.Label
  */
 @Suppress("DEPRECATION")
 @JvmName("labelForIdSignal")
-fun Label.forId(signal: Signal<String?>) {
+fun Label.forId(signal: Signal<String?>): Label {
     fun apply(forId: String?) {
         setFor(forId)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

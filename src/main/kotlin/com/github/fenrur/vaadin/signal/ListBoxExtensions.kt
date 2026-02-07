@@ -13,7 +13,7 @@ import com.vaadin.flow.data.provider.DataProvider
  * Two-way binding for ListBox selection.
  */
 @JvmName("listBoxSelectedItemMutableSignal")
-fun <T> ListBox<T>.selectedItem(signal: MutableSignal<T?>) {
+fun <T> ListBox<T>.selectedItem(signal: MutableSignal<T?>): ListBox<T> {
     fun apply(item: T?) {
         value = item
     }
@@ -25,17 +25,19 @@ fun <T> ListBox<T>.selectedItem(signal: MutableSignal<T?>) {
     }
 
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive DataProvider for ListBox.
  */
 @JvmName("listBoxDataProviderSignal")
-fun <T> ListBox<T>.dataProvider(signal: Signal<DataProvider<T, *>>) {
+fun <T> ListBox<T>.dataProvider(signal: Signal<DataProvider<T, *>>): ListBox<T> {
     fun apply(provider: DataProvider<T, *>) {
         setDataProvider(provider)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

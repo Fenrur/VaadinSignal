@@ -13,13 +13,14 @@ import com.vaadin.flow.component.splitlayout.SplitLayoutVariant
  * Reactive orientation for SplitLayout.
  */
 @JvmName("splitLayoutOrientationSignal")
-fun SplitLayout.orientation(signal: Signal<SplitLayout.Orientation>) {
+fun SplitLayout.orientation(signal: Signal<SplitLayout.Orientation>): SplitLayout {
     fun apply(orientation: SplitLayout.Orientation) {
         setOrientation(orientation)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
@@ -27,20 +28,21 @@ fun SplitLayout.orientation(signal: Signal<SplitLayout.Orientation>) {
  * Note: This is a one-way binding (signal to component).
  */
 @JvmName("splitLayoutSplitterPositionSignal")
-fun SplitLayout.splitterPosition(signal: Signal<Double>) {
+fun SplitLayout.splitterPosition(signal: Signal<Double>): SplitLayout {
     fun apply(position: Double) {
         setSplitterPosition(position)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Two-way binding for SplitLayout splitter position.
  */
 @JvmName("splitLayoutSplitterPositionMutableSignal")
-fun SplitLayout.splitterPosition(signal: MutableSignal<Double>) {
+fun SplitLayout.splitterPosition(signal: MutableSignal<Double>): SplitLayout {
     setSplitterPosition(signal.value)
 
     addSplitterDragendListener {
@@ -54,13 +56,14 @@ fun SplitLayout.splitterPosition(signal: MutableSignal<Double>) {
     effect(signal) {
         setSplitterPosition(it)
     }
+    return this
 }
 
 /**
  * Reactive theme variants for SplitLayout.
  */
 @JvmName("splitLayoutThemeVariantsSignal")
-fun SplitLayout.themeVariants(signal: Signal<Set<SplitLayoutVariant>>) {
+fun SplitLayout.themeVariants(signal: Signal<Set<SplitLayoutVariant>>): SplitLayout {
     var previousVariants = emptySet<SplitLayoutVariant>()
 
     fun apply(variants: Set<SplitLayoutVariant>) {
@@ -71,13 +74,14 @@ fun SplitLayout.themeVariants(signal: Signal<Set<SplitLayoutVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for SplitLayout.
  */
 @JvmName("splitLayoutThemeVariantSignal")
-fun SplitLayout.themeVariant(signal: Signal<SplitLayoutVariant?>) {
+fun SplitLayout.themeVariant(signal: Signal<SplitLayoutVariant?>): SplitLayout {
     var previousVariant: SplitLayoutVariant? = null
 
     fun apply(variant: SplitLayoutVariant?) {
@@ -88,13 +92,14 @@ fun SplitLayout.themeVariant(signal: Signal<SplitLayoutVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive minimal theme for SplitLayout.
  */
 @JvmName("splitLayoutMinimalSignal")
-fun SplitLayout.minimal(signal: Signal<Boolean>) {
+fun SplitLayout.minimal(signal: Signal<Boolean>): SplitLayout {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(SplitLayoutVariant.LUMO_MINIMAL)
@@ -105,13 +110,14 @@ fun SplitLayout.minimal(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive small theme for SplitLayout.
  */
 @JvmName("splitLayoutSmallSignal")
-fun SplitLayout.small(signal: Signal<Boolean>) {
+fun SplitLayout.small(signal: Signal<Boolean>): SplitLayout {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(SplitLayoutVariant.LUMO_SMALL)
@@ -122,4 +128,5 @@ fun SplitLayout.small(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

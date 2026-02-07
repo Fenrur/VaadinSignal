@@ -13,11 +13,12 @@ import com.vaadin.flow.component.contextmenu.ContextMenu
  * Reactive open on click for ContextMenu.
  */
 @JvmName("contextMenuOpenOnClickSignal")
-fun ContextMenu.openOnClick(signal: Signal<Boolean>) {
+fun ContextMenu.openOnClick(signal: Signal<Boolean>): ContextMenu {
     fun apply(enabled: Boolean) {
         isOpenOnClick = enabled
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

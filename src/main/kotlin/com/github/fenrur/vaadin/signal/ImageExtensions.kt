@@ -11,24 +11,26 @@ import com.vaadin.flow.component.html.Image
  * Reactive src for Image.
  */
 @JvmName("imageSrcSignal")
-fun Image.src(signal: Signal<String>) {
+fun Image.src(signal: Signal<String>): Image {
     fun apply(src: String) {
         setSrc(src)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive alt text for Image.
  */
 @JvmName("imageAltSignal")
-fun Image.alt(signal: Signal<String>) {
+fun Image.alt(signal: Signal<String>): Image {
     fun apply(alt: String) {
         setAlt(alt)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }

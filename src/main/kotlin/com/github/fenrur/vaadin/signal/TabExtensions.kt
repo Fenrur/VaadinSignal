@@ -12,46 +12,49 @@ import com.vaadin.flow.component.tabs.TabVariant
  * Reactive label for Tab.
  */
 @JvmName("tabLabelSignal")
-fun Tab.label(signal: Signal<String>) {
+fun Tab.label(signal: Signal<String>): Tab {
     fun apply(label: String) {
         setLabel(label)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive selected state for Tab.
  */
 @JvmName("tabSelectedSignal")
-fun Tab.selected(signal: Signal<Boolean>) {
+fun Tab.selected(signal: Signal<Boolean>): Tab {
     fun apply(selected: Boolean) {
         isSelected = selected
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive flex grow for Tab.
  */
 @JvmName("tabFlexGrowSignal")
-fun Tab.flexGrow(signal: Signal<Double>) {
+fun Tab.flexGrow(signal: Signal<Double>): Tab {
     fun apply(flexGrow: Double) {
         setFlexGrow(flexGrow)
     }
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive theme variants for Tab.
  */
 @JvmName("tabThemeVariantsSignal")
-fun Tab.themeVariants(signal: Signal<Set<TabVariant>>) {
+fun Tab.themeVariants(signal: Signal<Set<TabVariant>>): Tab {
     var previousVariants = emptySet<TabVariant>()
 
     fun apply(variants: Set<TabVariant>) {
@@ -62,13 +65,14 @@ fun Tab.themeVariants(signal: Signal<Set<TabVariant>>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive single theme variant for Tab.
  */
 @JvmName("tabThemeVariantSignal")
-fun Tab.themeVariant(signal: Signal<TabVariant?>) {
+fun Tab.themeVariant(signal: Signal<TabVariant?>): Tab {
     var previousVariant: TabVariant? = null
 
     fun apply(variant: TabVariant?) {
@@ -79,13 +83,14 @@ fun Tab.themeVariant(signal: Signal<TabVariant?>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
 
 /**
  * Reactive icon on top theme for Tab.
  */
 @JvmName("tabIconOnTopSignal")
-fun Tab.iconOnTop(signal: Signal<Boolean>) {
+fun Tab.iconOnTop(signal: Signal<Boolean>): Tab {
     fun apply(enabled: Boolean) {
         if (enabled) {
             addThemeVariants(TabVariant.LUMO_ICON_ON_TOP)
@@ -96,4 +101,5 @@ fun Tab.iconOnTop(signal: Signal<Boolean>) {
 
     apply(signal.value)
     effect(signal) { apply(it) }
+    return this
 }
